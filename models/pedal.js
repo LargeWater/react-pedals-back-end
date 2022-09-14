@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const gearSchema = new Schema({
+const pedalSchema = new Schema({
   name: {type: String, required: true},
   type: {type: String, required: true},
   description: {type: String},
@@ -11,8 +11,8 @@ const gearSchema = new Schema({
   timestamps: true
 })
 
-const Gear = mongoose.model('Gear', gearSchema)
+const Pedal = mongoose.model('Pedal', pedalSchema)
 
 export {
-  Gear
+  Pedal
 }
