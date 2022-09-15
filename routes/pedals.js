@@ -5,6 +5,8 @@ const router = Router()
 
 /*---------- Public Routes ----------*/
 
+router.get('/', pedalsCtrl.index)
+
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, pedalsCtrl.create)
