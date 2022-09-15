@@ -28,7 +28,44 @@ function index(req, res) {
   })
 }
 
+function update(req, res) {
+  Pedal.findById(req.params.id)
+  .then(pedal => {
+    if (!pedal.owner.equals(req.user.profile._id)) return res.status(401).json({msg: 'Not Authorized'})
+    Object.assign(pedal, req.body)
+    pedal.save()
+    .then(updatedPedal => {
+      res.json(updatedPedal)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
+
+function deleteOne(req, res) {
+  Pedal.findById(req.params.id)
+  .then(pedal => {
+    if (pedal.owner._id.equals(req.user.profile)) {
+      Pedal.findByIdAndDelete(pedal._id)
+      .then(deletedPedal => {
+        res.json(deletedPedal)
+      })
+    } else {
+      res.status(401).json({msg: 'Not Authorized'})
+    }
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
+
+
 export {
   create,
-  index
+  index,
+  update,
+  deleteOne as delete
 }

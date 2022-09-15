@@ -10,6 +10,7 @@ router.get('/', pedalsCtrl.index)
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, pedalsCtrl.create)
+router.delete('/:id', checkAuth, pedalsCtrl.delete)
 
 export {
   router
