@@ -11,6 +11,7 @@ router.get('/', pedalsCtrl.index)
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, pedalsCtrl.create)
 router.delete('/:id', checkAuth, pedalsCtrl.delete)
+router.put('/:id', checkAuth, pedalsCtrl.update)
 
 export {
   router

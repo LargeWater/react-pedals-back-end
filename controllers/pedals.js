@@ -31,12 +31,14 @@ function index(req, res) {
 function update(req, res) {
   Pedal.findById(req.params.id)
   .then(pedal => {
-    if (!pedal.owner.equals(req.user.profile._id)) return res.status(401).json({msg: 'Not Authorized'})
-    Object.assign(pedal, req.body)
-    pedal.save()
-    .then(updatedPedal => {
-      res.json(updatedPedal)
-    })
+    if (pedal.owner._id.equals(req.user.profile)) {
+      Pedal.findByIdAndUpdate(req.params.id, req.body, {new: true})
+      .then(updatedPedal => {
+        res.json(updatedPedal)
+      })
+    } else {
+      res.status(401).json({msg: 'Not Authorized'})
+    }
   })
   .catch(err => {
     console.log(err)
