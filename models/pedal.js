@@ -6,6 +6,7 @@ const pedalSchema = new Schema({
   name: {type: String, required: true},
   type: {type: String, required: true},
   description: {type: String},
+  photo: {type: String},
   owner: {type: mongoose.Schema.Types.ObjectId, ref: "Profile"},
 }, {
   timestamps: true
