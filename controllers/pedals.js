@@ -1,4 +1,5 @@
 import { Pedal } from '../models/pedal.js'
+import { v2 as cloudinary } from 'cloudinary'
 
 function create(req, res) {
   req.body.owner = req.user.profile
@@ -64,10 +65,29 @@ function deleteOne(req, res) {
   })
 }
 
+function addPhoto(req, res) {
+  const imageFile = req.files.photo.path
+  Pedal.findById(req.params.id)
+  .then(pedal => {
+    cloudinary.uploader.upload(imageFile, {tags: `${pedal.name}`})
+    .then(image => {
+      pedal.photo = image.url
+      pedal.save()
+      .then(pedal => {
+        res.status(201).json(pedal.photo)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  })
+}
 
 export {
   create,
   index,
   update,
-  deleteOne as delete
+  deleteOne as delete,
+  addPhoto
 }
