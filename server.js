@@ -7,6 +7,7 @@ import formData from 'express-form-data'
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as pedalsRouter } from './routes/pedals.js'
+import { router as pedalboardsRouter } from './routes/pedalboards.js'
 
 import './config/database.js'
 
