@@ -68,7 +68,7 @@ export {
   create,
   index,
   update,
-  deleteOne,
+  deleteOne as delete,
 };
 
 

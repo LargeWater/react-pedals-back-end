@@ -15,9 +15,6 @@ router.put('/:id', checkAuth, pedalboardCtrl.update)
 
 
 
-
-
-
 export{
   router
 }

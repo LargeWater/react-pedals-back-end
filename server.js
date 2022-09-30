@@ -21,6 +21,7 @@ app.use(formData.parse())
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/pedals', pedalsRouter)
+app.use('/api/pedalboards', pedalboardsRouter)
 
 app.use(function (req, res, next) {
   res.status(404).json({ err: 'Not found' })
